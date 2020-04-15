@@ -12,6 +12,8 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   Map<String, double> dataMap = new Map();
   List<Color> colorList = [Colors.red, Colors.cyan];
+  List<String> titles = ['Complete Reference C++', 'abc'];
+  List returndates = ['20/4/2020', '1/2/2020'];
 
   void initState() {
     super.initState();
@@ -19,12 +21,6 @@ class _DashboardState extends State<Dashboard> {
     dataMap.putIfAbsent("Returned Books", () => 5);
   }
 
-  List<TableRow> tableRow = [
-    TableRow(children: <Widget>[
-      Text('Hello'),
-      Text('World'),
-    ])
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,28 +51,35 @@ class _DashboardState extends State<Dashboard> {
               'ISSUED BOOKS',
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
-              height: 15.0,
-            ),
-            IssuedBooks(
-              title: 'Complete Reference C++',
-              returnDate: '22/04/2020',
-            ),
-            SizedBox(
-              height: 15.0,
-            ),
-            IssuedBooks(
-              title: 'Complete Reference C++',
-              returnDate: '22/04/2020',
-            ),
-            SizedBox(
-              height: 15.0,
-            ),
-            IssuedBooks(
-              title: 'Complete Reference C++',
-              returnDate: '22/04/2020',
-            ),
+            Expanded(
+              flex: 1,
+              child: ListView.builder(
+                  itemCount: titles.length,
+                  itemBuilder: (context, index) {
+                    return IssuedBooks(
+                      title: titles[index],
+                      returnDate: returndates[index],
+                    );
+                  }),
+            )
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue,
+        onPressed: () {
+          setState(() {
+            titles.add('new book');
+            returndates.add('5/5/2020');
+          });
+        },
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Container(
+          height: 50.0,
         ),
       ),
     );

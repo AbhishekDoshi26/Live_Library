@@ -9,10 +9,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Live Library',
-      theme: ThemeData.dark().copyWith(
+      darkTheme: ThemeData.dark().copyWith(
         primaryColor: Colors.blue,
-        accentColor: Colors.blue,
+        accentColor: Colors.blueAccent,
       ),
+      theme: ThemeData(
+          primarySwatch: Colors.blue, accentColor: Colors.blueAccent),
       home: Dashboard(),
     );
   }
