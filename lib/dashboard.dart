@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 
 import 'issued_books.dart';
 
@@ -11,13 +12,13 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   Map<String, double> dataMap = new Map();
-  List<Color> colorList = [Colors.red, Colors.cyan];
-  List<String> titles = ['Complete Reference C++', 'abc'];
+  List<Color> colorList = [Colors.red, Colors.blue];
+  List<String> titles = [];
   List returndates = ['20/4/2020', '1/2/2020'];
 
   void initState() {
     super.initState();
-    dataMap.putIfAbsent("Issued Books", () => 2);
+    dataMap.putIfAbsent("Issued Books", () => 5);
     dataMap.putIfAbsent("Returned Books", () => 5);
   }
 
@@ -25,8 +26,19 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 8,
         leading: Icon(Icons.home),
         title: Text('Dashboard'),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.brightness_medium),
+              onPressed: () {
+                DynamicTheme.of(context).setBrightness(
+                    Theme.of(context).brightness == Brightness.dark
+                        ? Brightness.light
+                        : Brightness.dark);
+              })
+        ],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(30),
@@ -47,21 +59,26 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               height: 10.0,
             ),
-            Text(
-              'ISSUED BOOKS',
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            ),
-            Expanded(
-              flex: 1,
-              child: ListView.builder(
-                  itemCount: titles.length,
-                  itemBuilder: (context, index) {
-                    return IssuedBooks(
-                      title: titles[index],
-                      returnDate: returndates[index],
-                    );
-                  }),
-            )
+            titles.length == 0
+                ? Container()
+                : Text(
+                    'ISSUED BOOKS',
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  ),
+            titles.length == 0
+                ? Container()
+                : Expanded(
+                    flex: 1,
+                    child: ListView.builder(
+                        itemCount: titles.length,
+                        itemBuilder: (context, index) {
+                          return IssuedBooks(
+                            title: titles[index],
+                            returnDate: returndates[index],
+                          );
+                        }),
+                  )
           ],
         ),
       ),
