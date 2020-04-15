@@ -14,7 +14,7 @@ class _DashboardState extends State<Dashboard> {
   Map<String, double> dataMap = new Map();
   List<Color> colorList = [Colors.red, Colors.blue];
   List<String> titles = [];
-  List returndates = ['20/4/2020', '1/2/2020'];
+  List returndates = [];
 
   void initState() {
     super.initState();
@@ -31,6 +31,7 @@ class _DashboardState extends State<Dashboard> {
         title: Text('Dashboard'),
         actions: <Widget>[
           IconButton(
+              tooltip: 'Change Theme',
               icon: Icon(Icons.brightness_medium),
               onPressed: () {
                 DynamicTheme.of(context).setBrightness(
@@ -83,6 +84,7 @@ class _DashboardState extends State<Dashboard> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        tooltip: 'Add Book',
         backgroundColor: Colors.blue,
         onPressed: () {
           setState(() {

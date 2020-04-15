@@ -27,7 +27,10 @@ class IssuedBooks extends StatelessWidget {
                 style: textStyle,
               ),
             ),
-            Image.asset('assets/Complete Reference C++.jpg',scale: 4,),
+            Image.asset(
+              'assets/Complete Reference C++.jpg',
+              scale: 4,
+            ),
           ],
         ),
       ),

@@ -10,7 +10,8 @@ class MyApp extends StatelessWidget {
     return DynamicTheme(
         defaultBrightness: Brightness.dark,
         data: (brightness) => new ThemeData(
-              primaryColor: Colors.blue, accentColor: Colors.blueAccent,
+              primaryColor: Colors.blue,
+              accentColor: Colors.blueAccent,
               brightness: brightness,
             ),
         themedWidgetBuilder: (context, theme) {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
             //   primaryColor: Colors.blue,
             //   accentColor: Colors.blueAccent,
             // ),
-            theme:theme,
+            theme: theme,
             home: Dashboard(),
           );
         });
