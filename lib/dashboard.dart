@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:livelibrary/book_rack.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 
@@ -31,6 +35,13 @@ class _DashboardState extends State<Dashboard> {
         title: Text('Dashboard'),
         actions: <Widget>[
           IconButton(
+              tooltip: 'Book Rack',
+              icon: FaIcon(FontAwesomeIcons.book),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BookRack()));
+              }),
+          IconButton(
               tooltip: 'Change Theme',
               icon: Icon(Icons.brightness_medium),
               onPressed: () {
@@ -38,7 +49,13 @@ class _DashboardState extends State<Dashboard> {
                     Theme.of(context).brightness == Brightness.dark
                         ? Brightness.light
                         : Brightness.dark);
-              })
+              }),
+          IconButton(
+              tooltip: 'Log Out',
+              icon: FaIcon(FontAwesomeIcons.signOutAlt),
+              onPressed: () {
+                exit(1);
+              }),
         ],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -88,7 +105,7 @@ class _DashboardState extends State<Dashboard> {
         backgroundColor: Colors.blue,
         onPressed: () {
           setState(() {
-            titles.add('new book');
+            titles.add('Complete Reference C++');
             returndates.add('5/5/2020');
           });
         },

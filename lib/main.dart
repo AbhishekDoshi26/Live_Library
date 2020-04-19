@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:livelibrary/book_rack.dart';
 import 'dashboard.dart';
 
 void main() => runApp(MyApp());
@@ -18,10 +19,6 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Live Library',
-            // darkTheme: ThemeData.dark().copyWith(
-            //   primaryColor: Colors.blue,
-            //   accentColor: Colors.blueAccent,
-            // ),
             theme: theme,
             home: Dashboard(),
           );
