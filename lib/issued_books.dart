@@ -15,23 +15,16 @@ class IssuedBooks extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        clipBehavior: Clip.antiAlias,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Container(
-              width: 250,
-              padding: EdgeInsets.all(8),
-              child: Text(
-                'Title: ' + title + '\nReturn Date: ' + returnDate,
-                style: textStyle,
-              ),
+        child: Container(
+          width: 250,
+          padding: EdgeInsets.all(8),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Title: ' + title + '\nReturn Date: ' + returnDate,
+              style: textStyle,
             ),
-            Image.asset(
-              'assets/Complete Reference C++.jpg',
-              scale: 4,
-            ),
-          ],
+          ),
         ),
       ),
     );

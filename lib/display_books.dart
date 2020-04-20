@@ -38,13 +38,18 @@ class CustomCard extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 8.0),
         child: Card(
           elevation: 8,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
           child: Container(
-            height: 65,
-            alignment: Alignment.center,
+            width: 250,
+            padding: EdgeInsets.all(8),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(title, style: TextStyle(fontSize: 18)),
+              child: Text(
+                'Title: ' + title,
+                style: TextStyle(fontSize: 20.0),
+              ),
             ),
           ),
         ),
@@ -59,7 +64,7 @@ class DisplayBooks extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 8,
-        title: new Text("Recomended Books"),
+        title: new Text("Recommended Books"),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(30),

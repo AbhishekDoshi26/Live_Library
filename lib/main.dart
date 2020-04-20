@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:livelibrary/book_rack.dart';
+import 'package:livelibrary/display_books.dart';
 import 'dashboard.dart';
 
 void main() => runApp(MyApp());
@@ -21,6 +21,11 @@ class MyApp extends StatelessWidget {
             title: 'Live Library',
             theme: theme,
             home: Dashboard(),
+            routes: <String, WidgetBuilder>{
+        '/homepage': (BuildContext context) => Dashboard(),
+        // '/loginpage': (BuildContext context) => MyApp(),
+        '/displaybooks': (BuildContext context) => DisplayBooks(),
+      },
           );
         });
   }

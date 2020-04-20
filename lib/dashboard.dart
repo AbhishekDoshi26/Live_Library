@@ -1,13 +1,13 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:livelibrary/book_rack.dart';
+import 'package:livelibrary/get_issued_books.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 
-import 'issued_books.dart';
+double n_issued_books = 0;
+Map<String, double> dataMap = Map();
 
 class Dashboard extends StatefulWidget {
   @override
@@ -15,15 +15,13 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  Map<String, double> dataMap = new Map();
+//  Map<String, double> dataMap = Map();
   List<Color> colorList = [Colors.red, Colors.blue];
-  List<String> titles = [];
-  List returndates = [];
 
   void initState() {
     super.initState();
-    dataMap.putIfAbsent("Issued Books", () => 5);
-    dataMap.putIfAbsent("Returned Books", () => 5);
+    dataMap.putIfAbsent("Issued Books", () => n_issued_books);
+    dataMap.putIfAbsent("Returned Books", () => 50);
   }
 
   @override
@@ -35,11 +33,10 @@ class _DashboardState extends State<Dashboard> {
         title: Text('Dashboard'),
         actions: <Widget>[
           IconButton(
-              tooltip: 'Book Rack',
+              tooltip: 'Recommended Books',
               icon: FaIcon(FontAwesomeIcons.book),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => BookRack()));
+                Navigator.pushNamed(context, '/displaybooks');
               }),
           IconButton(
               tooltip: 'Change Theme',
@@ -67,6 +64,7 @@ class _DashboardState extends State<Dashboard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            //TODO: pie chart dynamic kari deje dataMap ni value set kairi 6 get_issued_books.dart ma pan nathi thatu
             PieChart(
               dataMap: dataMap,
               colorList: colorList,
@@ -77,45 +75,19 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               height: 10.0,
             ),
-            titles.length == 0
+            n_issued_books == 0
                 ? Container()
                 : Text(
                     'ISSUED BOOKS',
                     style:
                         TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
-            titles.length == 0
-                ? Container()
-                : Expanded(
+                  //TODO: ne aanu pan setting kari deje  
+             Expanded(
                     flex: 1,
-                    child: ListView.builder(
-                        itemCount: titles.length,
-                        itemBuilder: (context, index) {
-                          return IssuedBooks(
-                            title: titles[index],
-                            returnDate: returndates[index],
-                          );
-                        }),
-                  )
+                    child: GetIssuedBooks()
+                  ),
           ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Add Book',
-        backgroundColor: Colors.blue,
-        onPressed: () {
-          setState(() {
-            titles.add('Complete Reference C++');
-            returndates.add('5/5/2020');
-          });
-        },
-        child: Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        child: Container(
-          height: 50.0,
         ),
       ),
     );
