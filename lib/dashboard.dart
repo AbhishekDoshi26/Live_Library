@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:livelibrary/get_issued_books.dart';
+import 'package:livelibrary/login.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 
-double n_issued_books = 0;
 Map<String, double> dataMap = Map();
 
 class Dashboard extends StatefulWidget {
@@ -20,7 +20,7 @@ class _DashboardState extends State<Dashboard> {
 
   void initState() {
     super.initState();
-    dataMap.putIfAbsent("Issued Books", () => n_issued_books);
+    dataMap.putIfAbsent("Issued Books", () => double.parse(issuedBooks));
     dataMap.putIfAbsent("Returned Books", () => 50);
   }
 
@@ -64,7 +64,6 @@ class _DashboardState extends State<Dashboard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            //TODO: pie chart dynamic kari deje dataMap ni value set kairi 6 get_issued_books.dart ma pan nathi thatu
             PieChart(
               dataMap: dataMap,
               colorList: colorList,
@@ -75,14 +74,13 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               height: 10.0,
             ),
-            n_issued_books == 0
+            issuedBooks == null
                 ? Container()
                 : Text(
                     'ISSUED BOOKS',
                     style:
                         TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
-                  //TODO: ne aanu pan setting kari deje  
              Expanded(
                     flex: 1,
                     child: GetIssuedBooks()

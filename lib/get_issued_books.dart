@@ -1,8 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:livelibrary/issued_books.dart';
+import 'package:livelibrary/login.dart';
 import 'dashboard.dart';
 class GetIssuedBooks extends StatelessWidget {
   @override
@@ -14,7 +13,7 @@ class GetIssuedBooks extends StatelessWidget {
           child: StreamBuilder<QuerySnapshot>(
             stream: Firestore.instance
                 .collection('Issued Books')
-                .where("Enrollment No", isEqualTo: "170050107024")
+                .where("Enrollment No", isEqualTo: enroll)
                 .snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -34,8 +33,8 @@ class GetIssuedBooks extends StatelessWidget {
                   return ListView(
                     children: snapshot.data.documents
                         .map((DocumentSnapshot document) {
-                          n_issued_books = double.parse(snapshot.data.documents.length.toString());
-                          dataMap.putIfAbsent('Issued Books', () => n_issued_books);
+                          issuedBooks = snapshot.data.documents.length.toString();
+                          dataMap.putIfAbsent("Issued Books", () => double.parse(issuedBooks));
                       return IssuedBooks(
                         title: document['Title'],
                         returnDate: document['Return Date'],

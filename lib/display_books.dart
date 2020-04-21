@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:livelibrary/book_details.dart';
-//TODO: Ahiya databse mathi books fetch karvani jema collection nu name Books che!! Display only those books which are for the sem of the students
-
+import 'package:livelibrary/login.dart';
 
 class CustomCard extends StatelessWidget {
   CustomCard(
@@ -77,7 +76,7 @@ class DisplayBooks extends StatelessWidget {
           child: StreamBuilder<QuerySnapshot>(
             stream: Firestore.instance
                 .collection('Books')
-                .where("Sem", isEqualTo: "6")
+                .where("Sem", isEqualTo: sem)
                 .snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
